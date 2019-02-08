@@ -5,17 +5,21 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app"
+    "start": "node app",
+    "dev": "nodemon app --watch ./* --ext js"
   },
   "author": "Jorge",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.18.2",
     "consign": "^0.1.2",
     "ejs": "^2.5.2",
-    "express": "^4.14.0",
+    "express": "^4.16.2",
     "express-session": "^1.14.1",
     "express-validator": "^2.20.8",
-    "mongodb": "^2.2.10"
+    "mongodb": "^3.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }
