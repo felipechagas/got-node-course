@@ -8,11 +8,10 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario, res){
 		usuario:    usuario,
 		collection: "usuarios",
 		callback:   function(err, result) {
-						res.send("olá Marilene");
+						 res.send("olá Marilene");
 					}
 	};
-	
-	this._connection(dados);
+	this._connection(dados); 
 }
 
 UsuariosDAO.prototype.autenticar = function(usuario, req, res){
