@@ -44,3 +44,5 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res){
 module.exports = function(){
 	return UsuariosDAO;
 };
+
+// TODO: Atualizar
