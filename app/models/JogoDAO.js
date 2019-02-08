@@ -23,7 +23,7 @@ JogoDAO.prototype.gerarParametros = function(usuario){
 	this._connection(dados); 
 }
 
-JogoDAO.prototype.iniciaJogo = function(res, usuario, casa){
+JogoDAO.prototype.iniciaJogo = function(res, usuario, casa, comando_invalido){
 
     var dados = {
 		operacao:   "getJogos",
@@ -31,7 +31,7 @@ JogoDAO.prototype.iniciaJogo = function(res, usuario, casa){
 		collection: "jogo",
 		callback:   function(err, result) {
                         console.log(result);
-                        res.render('jogo', { img_casa: casa, jogo: result[0] });
+                        res.render('jogo', { img_casa: casa, jogo: result[0], comando_invalido: comando_invalido });
 					}
 	};
 
@@ -41,3 +41,5 @@ JogoDAO.prototype.iniciaJogo = function(res, usuario, casa){
 module.exports = function(){
     return JogoDAO;
 }
+
+// TODO: Atualizar
