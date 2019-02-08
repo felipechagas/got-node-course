@@ -5,41 +5,42 @@ function UsuariosDAO(connection){
 UsuariosDAO.prototype.inserirUsuario = function(usuario, res){
 	var dados = {
 		operacao:   "inserir",
-		usuario:    usuario,
+		json:    usuario,
 		collection: "usuarios",
 		callback:   function(err, result) {
-						 res.send("olá Marilene");
+						
 					}
 	};
+
 	this._connection(dados); 
-}
+};
 
 UsuariosDAO.prototype.autenticar = function(usuario, req, res){
-	this._connection.open( function(err, mongoclient){
-		mongoclient.collection("usuarios", function(err, collection){
-			collection.find(usuario).toArray(function(err, result){
+	var dados = {
+		operacao:   "autenticar",
+		json:    usuario,
+		collection: "usuarios",
+		callback:   function(err, result) {
+						if(result[0] != undefined){
 
-				if(result[0] != undefined){
+							req.session.autorizado = true;
 
-					req.session.autorizado = true;
+							req.session.usuario = result[0].usuario;
+							req.session.casa = result[0].casa;
+						}
 
-					req.session.usuario = result[0].usuario;
-					req.session.casa = result[0].casa;
-				}
+						if(req.session.autorizado){
+							res.redirect("jogo");
+						} else {
+							res.render("home", {validacao: {}});
+						}
+					}
+	};
 
-				if(req.session.autorizado){
-					res.redirect("jogo");
-				} else {
-					res.render("home", {validacao: {}});
-				}
-
-			});
-			mongoclient.close();
-		});
-	});
-}
+	this._connection(dados); 
+};
 
 
 module.exports = function(){
 	return UsuariosDAO;
-}
+};

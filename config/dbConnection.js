@@ -22,8 +22,17 @@ function query(db, dados) {
 	var collection = db.collection(dados.collection);
 	switch (dados.operacao) {
 		case "inserir":
-			collection.insertOne(dados.usuario, dados.callback);
+			collection.insertOne(dados.json, dados.callback);
 			break;
+
+		case "autenticar":
+			collection.find(dados.json).toArray(dados.callback)
+			break;
+
+		case "getJogos":
+			collection.find({usuario:dados.json}).toArray(dados.callback)
+			break;
+
 		default:
 			break;
 	}
